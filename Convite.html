@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convite</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #000000;
+    }
+    .button {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 18px;
+      color: rgb(255, 255, 255);
+      background-color: #0a0a0a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #0b0b0b;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Oi, tenho uma pergunta importante para você...</h1>
+  <button class="button" id="question-button">Clique aqui para descobrir!</button>
+
+  <div id="question" class="hidden">
+    <h2>Topa sair comigo?</h2>
+    <button class="button" id="yes-button">Sim!</button>
+    <button class="button" id="no-button">Não, não saio com flamenguista</button>
+  </div>
+
+  <div id="commitment" class="hidden">
+    <h2>Você tem um compromisso no sábado! ❤️</h2>
+  </div>
+
+  <div id="not-available" class="hidden">
+    <h2>Ops! Essa opção não está disponível. 😅</h2>
+    <button class="button" id="back-button">Voltar</button>
+  </div>
+
+  <script>
+    const questionButton = document.getElementById('question-button');
+    const questionDiv = document.getElementById('question');
+    const yesButton = document.getElementById('yes-button');
+    const noButton = document.getElementById('no-button');
+    const commitmentDiv = document.getElementById('commitment');
+    const notAvailableDiv = document.getElementById('not-available');
+    const backButton = document.getElementById('back-button');
+
+   
+    function handleButtonClick(button, callback) {
+      button.addEventListener('click', callback);
+      button.addEventListener('touchstart', callback);  
+    }
+
+    handleButtonClick(questionButton, () => {
+      questionButton.classList.add('hidden');
+      questionDiv.classList.remove('hidden');
+    });
+
+    handleButtonClick(yesButton, () => {
+      questionDiv.classList.add('hidden');
+      commitmentDiv.classList.remove('hidden');
+    });
+
+    handleButtonClick(noButton, () => {
+      questionDiv.classList.add('hidden');
+      notAvailableDiv.classList.remove('hidden');
+      setTimeout(() => {
+        notAvailableDiv.classList.add('hidden');
+        questionDiv.classList.remove('hidden');
+      }, 2000); 
+    });
+
+    handleButtonClick(backButton, () => {
+      notAvailableDiv.classList.add('hidden');
+      questionDiv.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
